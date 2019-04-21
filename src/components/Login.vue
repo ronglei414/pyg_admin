@@ -2,7 +2,7 @@
 <div class="login-container">
     <div class="box">
     <img src="../assets/images/logo.png" alt="">
-    <el-form  :model="form" :rules="rules">
+    <el-form  ref="form" :model="form" :rules="rules">
         <el-form-item prop="username">
             <el-input  prefix-icon="iconfont icon-account" placeholder="请输入用户名" v-model="form.username"></el-input>
         </el-form-item>
@@ -19,29 +19,45 @@
 </template>
 
 <script>
-    export default {
-        name:'Login',
-        data() {
-            return {
-                form:{
-                    username:'',
-                    password:''
-                },
-                rules:{
-                    username:[
-                        {required: true,message:'请输入正确的用户名',trigger: 'blur'}
-                    ],
-                    password:[
-                        {required: true, message: '请输入密码', trigger: 'blur'},
-                        {min: 6, max: 18, message: '密码长度6-18个字符', trigger: 'blur'}
-                    ]
-                }
-            }
-        },
-        methods:{
-            
-        }
+export default {
+  name: 'Login',
+  data () {
+    return {
+      form: {
+        username: 'admin',
+        password: '123456'
+      },
+      rules: {
+        username: [
+          {required: true, message: '请输入正确的用户名', trigger: 'blur'}
+        ],
+        password: [
+          {required: true, message: '请输入密码', trigger: 'blur'},
+          {min: 6, max: 18, message: '密码长度6-18个字符', trigger: 'blur'}
+        ]
+      }
     }
+  },
+  methods: {
+    submit () {
+      //  验证表单
+      this.$refs.form.validate(async valid => {
+        if (valid) {
+          // 发送登陆的请求
+          // 通过 async await 获取响应的结果  去进行处理
+          const {data: {data, meta}} = await this.$http.post('login', this.form)
+          if (meta.status !== 200) return this.$message.error(meta.msg || '登陆失败')
+          // 登陆成功
+          // 保存token  
+           sessionStorage.setItem('token', data.token)
+          // 跳转 首页
+          this.$router.push('/home')
+        }
+      })
+      // console.log('submit')
+    }
+  }
+}
 </script>
 
 <style scoped>
