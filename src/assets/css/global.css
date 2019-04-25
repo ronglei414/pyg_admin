@@ -6,3 +6,13 @@ body{
     padding: 0;
    
 }
+.el-card{
+  margin-top: 15px;
+}
+.el-table{
+  margin-top: 15px;
+}
+.fenye{
+  margin-top: 15px;
+  text-align: right;
+}

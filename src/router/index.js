@@ -1,30 +1,56 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
-import Home from '@/components/Home'
+import Home from '@/components/Home/Home'
+import Welcome from '@/components/Home/Welcome'
+import Users from '@/components/Users/Users'
+import Rights from '@/components/Auth/Rights'
+import Roles from '@/components/Auth/Role'
 Vue.use(Router)
 
 const router = new Router({
-  routes: [
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login
+  routes: [{
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    // 如果是/ 返回首页
+    path: '/',
+    redirect: '/home'
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    component: Home,
+    redirect: '/welcome',
+    children: [{
+      path: '/welcome',
+      name: 'welcome',
+      component: Welcome
     },
     {
-      // 如果是/ 返回首页
-      path: '/',
-      redirect: '/home'
+      path: '/users',
+      name: 'users',
+      component: Users
     },
     {
-      path: '/home',
-      name: 'Home',
-      component: Home
+      path: '/rights',
+      name: 'rights',
+      component: Rights
+    },
+    {
+      path: '/roles',
+      name: 'roles',
+      component: Roles
     }
+
+    ]
+
+  }
   ]
 })
 // 添加导航守卫
-// eslint-disable-next-line no-undef
 router.beforeEach((to, from, next) => {
   // 1. 如果是跳转放
   if (to.path === '/login') return next()
@@ -33,5 +59,4 @@ router.beforeEach((to, from, next) => {
   // 3. 其他情况
   next()
 })
-
 export default router
