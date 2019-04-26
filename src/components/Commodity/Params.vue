@@ -12,12 +12,18 @@
                 type="warning"
                 show-icon>
       </el-alert>
+      <el-form :model="form"
+               ref="form"
+               style="margin:15px 0">
+        <el-form-item label="选择商品分类:">
+          <el-cascader expand-trigger="hover"
+                       :options="options"
+                       v-model="selectedOptions2"
+                       @change="handleChange">
+          </el-cascader>
+        </el-form-item>
 
-      <el-cascader expand-trigger="hover"
-                   :options="options"
-                   v-model="selectedOptions2"
-                   @change="handleChange">
-      </el-cascader>
+      </el-form>
 
     </el-card>
   </div>
