@@ -14,6 +14,12 @@ import axios from './http'
 import Element from 'element-ui'
 // 引入element-ui css
 import 'element-ui/lib/theme-chalk/index.css'
+// 富文本编辑器
+import VueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+Vue.use(VueQuillEditor)
 // 注册emelent-ui
 Vue.use(Element, {size: 'small'})
 // 全局注册axios

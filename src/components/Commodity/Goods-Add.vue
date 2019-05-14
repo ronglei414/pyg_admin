@@ -97,7 +97,10 @@
             <i class="el-icon-plus"></i>
           </el-upload>
         </el-tab-pane>
-        <el-tab-pane label="商品内容">商品内容</el-tab-pane>
+        <el-tab-pane label="商品内容">
+          <quill-editor v-model="form.goods_introduce"></quill-editor>
+          <el-button  style="margin-top:20px" type="primary" @click="addSubmit()">保存商品</el-button>
+        </el-tab-pane>
       </el-tabs>
     </el-card>
 

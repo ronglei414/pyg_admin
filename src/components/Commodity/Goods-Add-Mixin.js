@@ -140,6 +140,13 @@ export default {
       if (meta.status !== 200) return this.$message.error('获取参数数据失败')
       this[type + 'Attrs'] = data
       //   console.log(data)
+    },
+    async addSubmit () {
+      this.form.attrs = [...this.manyAttrs, ...this.onlyAttrs]
+      const {data: {meta}} = await this.$http.post('goods', this.form)
+      if (meta.status !== 201) return this.$message.error('商品录入失败')
+      this.$message.success('商品录入成功')
+      this.$router.push('/goods')
     }
   }
 }
