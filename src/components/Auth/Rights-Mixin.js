@@ -18,7 +18,7 @@ export default {
       } = await this.$http.get('rights/list')
       if (meta.status !== 200) return this.$message.console.error('获取列表失败')
       this.listData = data
-      console.log(data)
+      // console.log(data)
     }
   }
 }

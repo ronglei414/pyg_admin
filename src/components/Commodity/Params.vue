@@ -12,9 +12,7 @@
                 type="warning"
                 show-icon>
       </el-alert>
-      <el-form :model="form"
-               ref="form"
-               style="margin:15px 0">
+      <el-form style="margin:15px 0">
         <el-form-item label="选择商品分类:">
           <el-cascader expand-trigger="hover"
                        :options="options"
@@ -22,7 +20,6 @@
                        @change="handleChange">
           </el-cascader>
         </el-form-item>
-
       </el-form>
 
     </el-card>
